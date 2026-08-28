@@ -1,4 +1,4 @@
-# SIH DNS Security Project ![SIH Badge](https://img.shields.io/badge/SIH-2023-blue)
+# SIH DNS Security Project ![SIH Badge](https://img.shields.io/badge/SIH-2026-blue)
 
 DNS Filtering Service using Threat Intelligence and AI/ML.
 
