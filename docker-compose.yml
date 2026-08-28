@@ -1,0 +1,59 @@
+services:
+  dns-server:
+    build: ./backend
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - dns_network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - dns_network
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dnsadmin -d dns_security"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - dns_network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - dns-server
+    networks:
+      - dns_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  dns_network:
+    driver: bridge

@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+.venv
+venv
+env
+node_modules
+dist
+build
+.env
+*.joblib
+*.pkl
+.pytest_cache
+.coverage
+ml_training/data/raw/
+ml_training/data/processed/
