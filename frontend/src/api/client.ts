@@ -65,3 +65,8 @@ export const updateSettings = (data: any) => fetchAPI<any>('/api/v1/settings', {
   method: 'PATCH',
   body: JSON.stringify(data)
 });
+
+export const login = (credentials: any) => fetchAPI<any>('/api/v1/auth/login', {
+  method: 'POST',
+  body: JSON.stringify(credentials)
+});

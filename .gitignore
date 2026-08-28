@@ -13,3 +13,4 @@ build
 .coverage
 ml_training/data/raw/
 ml_training/data/processed/
+"*.zip" 

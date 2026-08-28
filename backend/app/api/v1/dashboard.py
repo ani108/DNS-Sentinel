@@ -15,8 +15,38 @@ from app.schemas.dashboard import (
 )
 from app.schemas.dns import DNSQueryResponse
 from app.core.constants import REDIS_BLOCKLIST_KEY, REDIS_STATS_TOTAL, REDIS_STATS_BLOCKED
+from fastapi.responses import StreamingResponse
+import io
+import csv
 
 router = APIRouter()
+
+@router.get("/queries/export")
+async def export_queries(db: AsyncSession = Depends(get_db)):
+    """Export recent DNS queries to CSV."""
+    queries = await DNSQueryCRUD.get_recent(db, limit=2000)
+    
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["Timestamp", "Domain", "Type", "Client IP", "Verdict", "Reason"])
+    
+    for q in queries:
+        writer.writerow([
+            q.queried_at.isoformat() if q.queried_at else "",
+            q.domain,
+            q.query_type,
+            q.client_ip or "",
+            q.verdict,
+            q.block_reason or ""
+        ])
+        
+    output.seek(0)
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=dns_logs.csv"}
+    )
+
 
 
 @router.get("/stats/summary", response_model=StatsSummary)

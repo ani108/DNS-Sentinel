@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     api_port: int = 8000
     cors_origins: List[str] = ["http://localhost:3000", "http://localhost:5173"]
 
+    # Auth
+    admin_username: str = "admin"
+    admin_password: str = "admin123"
+
     @property
     def database_url(self) -> str:
         return f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"

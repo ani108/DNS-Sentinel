@@ -39,7 +39,16 @@ export const Analytics: React.FC = () => {
 
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-900">Analytics & Logs</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-gray-900">Analytics & Logs</h1>
+        <a 
+          href="/api/v1/queries/export"
+          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium transition-colors shadow-sm"
+          download
+        >
+          Export CSV Report
+        </a>
+      </div>
       
       {loading ? (
         <div className="text-gray-500">Loading data...</div>

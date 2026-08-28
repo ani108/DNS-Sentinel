@@ -33,6 +33,18 @@ export default function Layout() {
             </NavLink>
           ))}
         </nav>
+        <div className="p-4 border-t border-slate-800">
+          <button 
+            onClick={() => {
+              localStorage.removeItem('sih_admin_token');
+              window.location.reload();
+            }}
+            className="flex items-center gap-3 px-3 py-2 w-full rounded-md transition-colors hover:bg-slate-800 hover:text-white text-left"
+          >
+            <Shield className="w-5 h-5 opacity-50" />
+            <span>Logout</span>
+          </button>
+        </div>
       </aside>
       <main className="flex-1 overflow-y-auto p-8">
         <Outlet />
