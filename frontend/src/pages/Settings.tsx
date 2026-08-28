@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { getSettings, updateSettings } from '../api/client';
-import { Save, Server, Shield, Brain } from 'lucide-react';
+import { getSettings, updateSettings, changePassword } from '../api/client';
+import { Save, Server, Shield, Brain, Lock } from 'lucide-react';
 
 export const Settings: React.FC = () => {
   const [settings, setSettings] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState('');
+  
+  const [passwordData, setPasswordData] = useState({ current: '', new: '' });
+  const [changingPwd, setChangingPwd] = useState(false);
+
+  const handlePasswordChange = async () => {
+    setChangingPwd(true);
+    try {
+      await changePassword({ current_password: passwordData.current, new_password: passwordData.new });
+      setToast('Password updated successfully!');
+      setPasswordData({ current: '', new: '' });
+      setTimeout(() => setToast(''), 3000);
+    } catch (e: any) {
+      setToast('Failed to update password. Check current password.');
+      setTimeout(() => setToast(''), 3000);
+    } finally {
+      setChangingPwd(false);
+    }
+  };
 
   useEffect(() => {
     const fetchSet = async () => {
@@ -127,6 +145,42 @@ export const Settings: React.FC = () => {
               value={settings.feed_sync_interval_minutes}
               onChange={(e) => updateField('feed_sync_interval_minutes', parseInt(e.target.value))}
             />
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-800">
+          <Lock size={20} className="text-gray-600" />
+          <h3>Admin Password</h3>
+        </div>
+        <div className="space-y-4 max-w-md">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+            <input
+              type="password"
+              className="w-full border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={passwordData.current}
+              onChange={(e) => setPasswordData(prev => ({ ...prev, current: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+            <input
+              type="password"
+              className="w-full border rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={passwordData.new}
+              onChange={(e) => setPasswordData(prev => ({ ...prev, new: e.target.value }))}
+            />
+          </div>
+          <div>
+            <button
+              onClick={handlePasswordChange}
+              disabled={changingPwd || !passwordData.current || !passwordData.new}
+              className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900 disabled:opacity-50"
+            >
+              {changingPwd ? 'Updating...' : 'Change Password'}
+            </button>
           </div>
         </div>
       </div>

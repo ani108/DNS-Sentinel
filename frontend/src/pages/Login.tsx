@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { ShieldAlert, Lock, User } from 'lucide-react';
-import { login } from '../api/client';
+import { login, forgotPassword } from '../api/client';
 
 export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setMsg('');
     setLoading(true);
     try {
       const res = await login({ username, password });
@@ -22,6 +24,16 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
       setError('Invalid username or password');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleForgot = async () => {
+    try {
+      const res = await forgotPassword();
+      setMsg(res.message);
+      setError('');
+    } catch (err) {
+      setError('Failed to reset password');
     }
   };
 
@@ -43,6 +55,11 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
             {error && (
               <div className="bg-red-50 text-red-600 p-3 rounded text-sm text-center font-medium">
                 {error}
+              </div>
+            )}
+            {msg && (
+              <div className="bg-green-50 text-green-700 p-3 rounded text-sm text-center font-medium">
+                {msg}
               </div>
             )}
             <div>
@@ -79,6 +96,14 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
               </div>
             </div>
 
+            <div className="flex items-center justify-between pt-1">
+              <div className="text-sm">
+                <button type="button" onClick={handleForgot} className="font-medium text-blue-600 hover:text-blue-500">
+                  Forgot your password?
+                </button>
+              </div>
+            </div>
+
             <div className="pt-2">
               <button
                 type="submit"
@@ -87,10 +112,6 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
               >
                 {loading ? 'Authenticating...' : 'Sign In'}
               </button>
-            </div>
-            
-            <div className="text-center text-xs text-gray-400 mt-4">
-              Default credentials: admin / admin123
             </div>
           </form>
         </div>

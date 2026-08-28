@@ -70,3 +70,12 @@ export const login = (credentials: any) => fetchAPI<any>('/api/v1/auth/login', {
   method: 'POST',
   body: JSON.stringify(credentials)
 });
+
+export const changePassword = (data: any) => fetchAPI<any>('/api/v1/auth/change-password', {
+  method: 'POST',
+  body: JSON.stringify(data)
+});
+
+export const forgotPassword = () => fetchAPI<any>('/api/v1/auth/forgot-password', {
+  method: 'POST'
+});

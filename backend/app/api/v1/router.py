@@ -3,7 +3,7 @@ from fastapi import APIRouter
 
 # Import route modules
 # These will be created in Phase 5. For now, use empty routers as placeholders.
-from app.api.v1 import dashboard, blocklist, whitelist, analyze, settings as settings_routes, auth
+from app.api.v1 import dashboard, blocklist, analyze, settings as settings_routes, auth
 
 api_router = APIRouter(prefix="/api/v1")
 
