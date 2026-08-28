@@ -4,7 +4,31 @@ DNS Filtering Service using Threat Intelligence and AI/ML.
 
 ## Architecture
 
-*(Architecture diagram reference)*
+```mermaid
+graph TD
+    Client[Client Devices] -->|UDP Port 53| DNS[DNS Proxy Server]
+    
+    subgraph Core Engine
+        DNS -->|Check cache| Redis[(Redis Cache)]
+        DNS -->|Threat Check| Blocklist[Threat Intel Lists]
+        DNS -->|Extract Features| ML[Random Forest ML Model]
+        DNS -->|Time Window| Tunnel[DNS Tunneling Detector]
+    end
+    
+    DNS -->|Allowed?| Upstream[Upstream DNS e.g. 1.1.1.1]
+    Upstream -.->|Response| DNS
+    DNS -.->|Filtered Response| Client
+    
+    subgraph Data Pipeline
+        DNS -->|Pub/Sub Publish| Redis
+        Redis -->|WebSocket Stream| FastAPI[FastAPI Backend]
+        FastAPI -->|Save Query| Postgres[(PostgreSQL DB)]
+    end
+    
+    subgraph Dashboard UI
+        FastAPI <-->|REST API & WSS| React[React / Vite Frontend]
+    end
+```
 
 ## Tech Stack
 
