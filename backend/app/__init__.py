@@ -1,1 +1,1 @@
-"""DNS Security Backend - SIH Project."""
+"""DNS Security Backend Project."""

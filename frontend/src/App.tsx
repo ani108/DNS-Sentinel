@@ -9,7 +9,7 @@ import { Settings } from './pages/Settings';
 import { Login } from './pages/Login';
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('sih_admin_token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('admin_token'));
 
   if (!isAuthenticated) {
     return <Login onLogin={() => setIsAuthenticated(true)} />;

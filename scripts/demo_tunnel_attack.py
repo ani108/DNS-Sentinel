@@ -50,7 +50,7 @@ def main():
     print("Attack Simulation Complete.")
     print(f"Successful Queries: {success}")
     print(f"Failed Queries: {failed}")
-    print("Check the SIH Dashboard for WebSocket Alarms!")
+    print("Check the Dashboard for WebSocket Alarms!")
     print("==================================================")
 
 if __name__ == "__main__":

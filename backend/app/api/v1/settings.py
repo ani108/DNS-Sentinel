@@ -22,7 +22,7 @@ async def update_settings(update: SettingsUpdate):
     """Update application settings.
     
     Note: In a production app, these would be persisted to a database.
-    For the SIH demo, we update the in-memory settings object.
+    For the demo, we update the in-memory settings object.
     Changes take effect immediately but don't survive restarts.
     """
     if update.upstream_dns is not None:

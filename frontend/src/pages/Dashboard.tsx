@@ -32,36 +32,36 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Dashboard</h1>
         <div className="flex items-center gap-2">
-          <span className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></span>
+          <span className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
           <span className="text-sm text-gray-600">{isConnected ? 'Live Stream Connected' : 'Stream Disconnected'}</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
           <div className="p-3 bg-blue-100 text-blue-600 rounded-full"><Activity size={24} /></div>
           <div>
             <p className="text-sm text-gray-500 font-medium">Total Queries</p>
             <p className="text-2xl font-bold text-gray-900">{stats?.total_queries.toLocaleString() ?? '-'}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
           <div className="p-3 bg-red-100 text-red-600 rounded-full"><ShieldAlert size={24} /></div>
           <div>
             <p className="text-sm text-gray-500 font-medium">Threats Blocked</p>
             <p className="text-2xl font-bold text-gray-900">{stats?.blocked_queries.toLocaleString() ?? '-'}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
           <div className="p-3 bg-purple-100 text-purple-600 rounded-full"><AlertCircle size={24} /></div>
           <div>
             <p className="text-sm text-gray-500 font-medium">Tunneling Detections</p>
             <p className="text-2xl font-bold text-gray-900">{stats?.tunneling_detected.toLocaleString() ?? '-'}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
           <div className="p-3 bg-green-100 text-green-600 rounded-full"><Database size={24} /></div>
           <div>
             <p className="text-sm text-gray-500 font-medium">Active Threat Feeds</p>

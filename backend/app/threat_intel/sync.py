@@ -50,7 +50,7 @@ REDIS_BLOCKLIST_KEY = "dns:blocklist"
 async def _fetch_feed(client: httpx.AsyncClient, url: str) -> str:
     """Fetch feed content from URL."""
     # Using a common user agent to avoid being blocked by some feeds
-    headers = {"User-Agent": "SIH-DNS-Security/1.0"}
+    headers = {"User-Agent": "DNS-Security/1.0"}
     response = await client.get(url, headers=headers, timeout=30.0)
     response.raise_for_status()
     return response.text

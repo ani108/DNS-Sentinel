@@ -23,7 +23,7 @@ async def login(req: LoginRequest, redis: aioredis.Redis = Depends(get_redis)):
     active_password = override if override else settings.admin_password
     
     if req.password == active_password:
-        return {"token": "sih-admin-token"}
+        return {"token": "admin-token"}
     raise HTTPException(status_code=401, detail="Invalid password")
 
 @router.post("/change-password")

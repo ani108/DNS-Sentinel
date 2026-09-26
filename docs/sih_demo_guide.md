@@ -1,4 +1,4 @@
-# SIH DNS Security - Hackathon Presentation Pitch & Demo Guide
+# DNS Security - Demo Guide
 
 ## ⏱️ 5-Minute Pitch Narrative
 

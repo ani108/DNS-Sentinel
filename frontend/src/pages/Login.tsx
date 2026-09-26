@@ -17,7 +17,7 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
     try {
       const res = await login({ username, password });
       if (res.token) {
-        localStorage.setItem('sih_admin_token', res.token);
+        localStorage.setItem('admin_token', res.token);
         onLogin();
       }
     } catch (err) {
@@ -40,17 +40,17 @@ export const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div className="flex justify-center text-blue-600 mb-4">
-          <ShieldAlert size={48} />
+        <div className="flex justify-center text-blue-600 mb-4 animate-bounce">
+          <ShieldAlert size={56} />
         </div>
-        <h2 className="text-3xl font-extrabold text-gray-900">Admin Login</h2>
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Admin Login</h2>
         <p className="mt-2 text-sm text-gray-600">
-          SIH DNS Security Project
+          DNS Sentinel Dashboard
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 transition-all duration-300 hover:shadow-2xl">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 text-red-600 p-3 rounded text-sm text-center font-medium">

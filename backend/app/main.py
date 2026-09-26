@@ -85,7 +85,7 @@ async def lifespan(app: FastAPI):
 # Create FastAPI app
 app = FastAPI(
     title="DNS Security Service",
-    description="DNS Filtering Service using Threat Intelligence and AI/ML — SIH Project",
+    description="DNS Filtering Service using Threat Intelligence and AI/ML",
     version="0.1.0",
     lifespan=lifespan,
 )

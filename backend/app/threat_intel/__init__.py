@@ -1,3 +1,3 @@
 """
-Threat intelligence module for SIH DNS Security project.
+Threat intelligence module for DNS Security project.
 """

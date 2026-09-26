@@ -31,7 +31,7 @@ def send_query(domain, target, port):
         print(f"[-] Failed to query {domain}: {e}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Demo Traffic Generator for SIH DNS Security")
+    parser = argparse.ArgumentParser(description="Demo Traffic Generator for DNS Security")
     parser.add_argument("--target", type=str, default="127.0.0.1", help="Target DNS server IP")
     parser.add_argument("--port", type=int, default=53, help="Target DNS server port")
     parser.add_argument("--interval", type=float, default=0.5, help="Interval between queries (seconds)")
